@@ -93,7 +93,7 @@ def get_one_planet(planet_id):
 @app.route('/favorite/planet/<int:planet_id>', methods=['POST'])
 def add_fav_planet(planet_id):
         try:
-            user_id = request.args.get('user_id')
+            user_id = request.json.get('user_id')
             existing_favorite = Favorites_Planets.query.filter_by(user_id=user_id, planet_id=planet_id).first()            
             if existing_favorite:
                 return jsonify({"message": "Is already a favorite planet of the user"}), 400            
@@ -113,7 +113,7 @@ def add_fav_planet(planet_id):
 @app.route('/favorite/people/<int:people_id>', methods=['POST'])
 def add_fav_people(people_id):
         try:
-            user_id = request.args.get('user_id')
+            user_id = request.json.get('user_id')
             existing_favorite = Favorites_People.query.filter_by(user_id=user_id, people_id=people_id).first()            
             if existing_favorite:
                 return jsonify({"message": "Is already a favorite people of the user"}), 400            
